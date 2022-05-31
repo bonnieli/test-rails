@@ -20,10 +20,10 @@ RSpec.describe 'Posts', type: :request do
   }
 
 
-  describe 'GET /api/post' do
+  describe 'GET /api/posts' do
     context 'when the request is valid' do
       it 'should return all posts of author ID in specific order.' do
-        get "/api/post", params: query_params, headers: valid_headers
+        get "/api/posts", params: query_params, headers: valid_headers
 
         expected_posts = { posts: [] }
 
@@ -48,11 +48,11 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'PUT /api/post/:postId' do 
+  describe 'PUT /api/posts/:postId' do 
 
     context 'when the request is valid' do 
       it 'should update properties of a post.' do 
-        put "/api/post/#{post1.id}", params: update_params, headers: valid_headers
+        put "/api/posts/#{post1.id}", params: update_params, headers: valid_headers
 
         expect(response.body).to eq({
           post: {

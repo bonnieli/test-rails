@@ -11,9 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+    outputs:
+      docs_changed: ${{ steps.check_file_changed.outputs.docs_changed }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Detect file change
+        shell: pwsh
+        # Give an id to the step, so we can reference it later
+        id: check_file_changed
+        run: |
+          $firstCommit = git rev-list --max-parents=0 HEAD
+
+          # Diff HEAD with the previous commit
+          $diff = git diff --name-only $firstCommit HEAD
+
+          echo $diff
+
+          # Check if a file called puma.rb has been changed
+          $SourceDiff = $diff | Where-Object { $_ -match '.puma.rb' }
+          $HasDiff = $SourceDiff.Length -gt 0
+
+          # Set the output named "docs_changed"
+          Write-Host "::set-output name=docs_changed::$HasDiff"
       # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
@@ -26,3 +48,12 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec --require rails_helper
+
+  # Run the job only with "docs_changed" equals "True"
+  conditional_job:
+    runs-on: "ubuntu-latest"
+    needs: [test]
+    if: needs.test.outputs.docs_changed == 'True'
+    steps:
+      - shell: pwsh
+        run: echo 'puma.rb detected change'

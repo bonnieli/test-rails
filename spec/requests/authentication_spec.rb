@@ -3,6 +3,15 @@
 # rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
+"""
+// ---------------------------------------------------------------- //
+//                                                                  //
+//                 PLEASE DO NOT MODIFY THIS FILE.                  //
+//               Hatchways automation depends on it.                //
+//                                                                  //
+// ---------------------------------------------------------------- //
+"""
+
 # Test suite for Login
 RSpec.describe 'Authentications API', type: :request do
   let(:user) { create(:user) }

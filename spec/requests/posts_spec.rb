@@ -3,6 +3,15 @@
 # rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
+"""
+// ---------------------------------------------------------------- //
+//                                                                  //
+//                 PLEASE DO NOT MODIFY THIS FILE.                  //
+//               Hatchways automation depends on it.                //
+//                                                                  //
+// ---------------------------------------------------------------- //
+"""
+
 RSpec.describe 'Posts', type: :request do
   # Initialize the data
 

@@ -57,11 +57,11 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'PUT /api/posts/:postId' do 
+  describe 'PATCH /api/posts/:postId' do 
 
     context 'when the request is valid' do 
       it 'should update properties of a post.' do 
-        put "/api/posts/#{post1.id}", params: update_params, headers: valid_headers
+        patch "/api/posts/#{post1.id}", params: update_params, headers: valid_headers
 
         expect(response.body).to eq({
           post: {

@@ -68,7 +68,9 @@ We've included sample data that the application has been configured to use. If y
 
 ### Unit Tests
 
-The tests are written using [RSpec](https://rspec.info/). To run these tests, run the following command in the terminal:
+Your repository contains a non-comprehensive set of unit tests used to determine if your pull request has met the basic requirements of the task given to you. These tests should NOT be modified unless specified in your GitHub issue.
+
+To run these tests, use the following command:
 
 - `rspec` or `bundle exec rspec`
 

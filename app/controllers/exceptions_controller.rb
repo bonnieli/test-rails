@@ -2,8 +2,12 @@ class ExceptionsController < ActionController::Base
     before_action :status
 
     def show
-        backtrace = @exception.backtrace.join("\n")
-        render json: { "exception": @exception, "trace": backtrace, "status": @status }
+        if @status == 404
+            render json: { "error": "The route is not defined" }, status: @status
+        else
+            backtrace = @exception.backtrace.join("\n")
+            render json: { "exception": @exception, "trace": backtrace, "status": @status }, status: @status
+        end
     end
 
     protected

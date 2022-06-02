@@ -87,7 +87,7 @@ You can use cURL or a tool like [Postman](https://www.postman.com/) to test the 
 You can log in as one of the seeded users with the following curl command:
 
 ```bash
-curl --location --request POST 'localhost:3000/api/login' \
+curl --location --request POST 'localhost:5000/api/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "thomas",
@@ -98,7 +98,7 @@ curl --location --request POST 'localhost:3000/api/login' \
 Then you can use the token that comes back from the /login request to make an authenticated request to create a new blog post
 
 ```bash
-curl --location --request POST 'localhost:3000/api/posts' \
+curl --location --request POST 'localhost:5000/api/posts' \
 --header 'x-access-token: your-token-here' \
 --header 'Content-Type: application/json' \
 --data-raw '{

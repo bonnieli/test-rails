@@ -10,4 +10,9 @@ Rails.application.routes.draw do
     post '/login', to: 'authentication#login'
     resources :posts, only: :create
   end
+
+  rack_error_handler = ActionDispatch::PublicExceptions.new('public/')
+
+  get "/404", to: rack_error_handler
+  get "/500", to: rack_error_handler
 end

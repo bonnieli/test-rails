@@ -19,6 +19,8 @@ class Post < ApplicationRecord
   def tags=(value)
     if value.kind_of? Array
       super value.join(",")
+    else
+      super value
     end
   end
 end

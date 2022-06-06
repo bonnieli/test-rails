@@ -4,7 +4,7 @@
 
 For this project, you are provided a starting code for a back end JSON API and are to build on this starting code by adding new features. The starting code is for the application described in the section below, and you can find your assigned work on the Issues tab of this repository. Please open a **single pull request** with all of the changes needed to implement the features described in the issue, then return to the Hatchways dashboard to mark your assessment as completed.
 
-We will use [this rubric](https://drive.google.com/file/d/1faFe4dn9C-60QIXWdzKvkm6pjHXFJ3pV/view?usp=sharing) to evaluate your submission. Please note that if your submission does not attempt to complete all of the requirements, or does not pass our plagiarism screening, we will be unable to provide feedback on it. Please contact hello@hatchways.io if you have any questions or concerns.
+We will use [this rubric](https://drive.google.com/file/d/1Lfn6JnanBhuSjMDQaIdIBk1_QK7i9mNU/view) to evaluate your submission. Please note that if your submission does not attempt to complete all of the requirements, or does not pass our plagiarism screening, we will be unable to provide feedback on it. Please contact hello@hatchways.io if you have any questions or concerns.
 
 ---
 
@@ -68,7 +68,9 @@ We've included sample data that the application has been configured to use. If y
 
 ### Unit Tests
 
-The tests are written using [RSpec](https://rspec.info/). To run these tests, run the following command in the terminal:
+Your repository contains a non-comprehensive set of unit tests used to determine if your pull request has met the basic requirements of the task given to you. These tests should NOT be modified unless specified in your GitHub issue.
+
+To run these tests, use the following command:
 
 - `rspec` or `bundle exec rspec`
 
@@ -87,7 +89,7 @@ You can use cURL or a tool like [Postman](https://www.postman.com/) to test the 
 You can log in as one of the seeded users with the following curl command:
 
 ```bash
-curl --location --request POST 'localhost:3000/api/login' \
+curl --location --request POST 'localhost:5000/api/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "thomas",
@@ -98,7 +100,7 @@ curl --location --request POST 'localhost:3000/api/login' \
 Then you can use the token that comes back from the /login request to make an authenticated request to create a new blog post
 
 ```bash
-curl --location --request POST 'localhost:3000/api/posts' \
+curl --location --request POST 'localhost:5000/api/posts' \
 --header 'x-access-token: your-token-here' \
 --header 'Content-Type: application/json' \
 --data-raw '{

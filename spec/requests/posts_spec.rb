@@ -3,6 +3,15 @@
 # rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
+"""
+// ---------------------------------------------------------------- //
+//                                                                  //
+//                 PLEASE DO NOT MODIFY THIS FILE.                  //
+//               Hatchways automation depends on it.                //
+//                                                                  //
+// ---------------------------------------------------------------- //
+"""
+
 RSpec.describe 'Posts', type: :request do
   # Initialize the data
 
@@ -20,10 +29,10 @@ RSpec.describe 'Posts', type: :request do
   }
 
 
-  describe 'GET /api/post' do
+  describe 'GET /api/posts' do
     context 'when the request is valid' do
       it 'should return all posts of author ID in specific order.' do
-        get "/api/post", params: query_params, headers: valid_headers
+        get "/api/posts", params: query_params, headers: valid_headers
 
         expected_posts = { posts: [] }
 
@@ -48,11 +57,11 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'PUT /api/post/:postId' do 
+  describe 'PATCH /api/posts/:postId' do 
 
     context 'when the request is valid' do 
       it 'should update properties of a post.' do 
-        put "/api/post/#{post1.id}", params: update_params, headers: valid_headers
+        patch "/api/posts/#{post1.id}", params: update_params, headers: valid_headers
 
         expect(response.body).to eq({
           post: {

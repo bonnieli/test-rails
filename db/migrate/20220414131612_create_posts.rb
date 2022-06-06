@@ -9,8 +9,6 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.integer :reads, default: 0
       t.float :popularity, default: 0.0
       t.string :tags
-
-      t.timestamps
     end
   end
 end

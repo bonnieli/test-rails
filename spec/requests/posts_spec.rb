@@ -2,6 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 require 'rails_helper'
+require 'json'
 
 """
 // ---------------------------------------------------------------- //
@@ -36,20 +37,18 @@ RSpec.describe 'Posts', type: :request do
 
         expected_posts = { posts: [] }
 
-        for post in [post3, post2, post1]
+        for post in [post1, post2, post3]
           expected_posts[:posts] << {
             tags: post.tags.split(","),
             id: post.id, 
             text: post.text,
             likes: post.likes,
             reads: post.reads,
-            popularity: post.popularity,
-            createdAt: post.created_at,
-            updatedAt: post.updated_at
+            popularity: post.popularity
         }
         end
 
-        expect(response.body).to eq(expected_posts.to_json)
+        expect(JSON.parse(response.body)).to eq(JSON.parse(expected_posts.to_json))
         expect(response).to have_http_status(200)
         
       end
@@ -61,21 +60,21 @@ RSpec.describe 'Posts', type: :request do
 
     context 'when the request is valid' do 
       it 'should update properties of a post.' do 
-        patch "/api/posts/#{post1.id}", params: update_params, headers: valid_headers
+        patch "/api/posts/#{post1.id}", params: update_params, headers: valid_headers, as: :json
 
-        expect(response.body).to eq({
+        expected_post = {
           post: {
             authorIds: [1, 5],
-            createdAt: post1.createdAt,
             id: post1.id, 
             likes: post1.likes, 
             popularity: post1.popularity,
             reads: post1.reads,
             tags: ['travel', 'vacation'],
-            text: 'my text',
-            updatedAt: post1.updatedAt
+            text: 'my text'
           }
-        }.to_json)
+        }
+
+        expect(JSON.parse(response.body)).to eq(JSON.parse(expected_post.to_json))
         expect(response).to have_http_status(200)
       end
     end

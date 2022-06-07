@@ -17,15 +17,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_14_131737) do
     t.integer "reads", default: 0
     t.float "popularity", default: 0.0
     t.string "tags" # note: comma separated string since sqlite does not support arrays
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_user_posts_on_post_id"
     t.index ["user_id"], name: "index_user_posts_on_user_id"
   end
@@ -33,8 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_14_131737) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "user_posts", "posts"

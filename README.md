@@ -24,7 +24,7 @@ Only a logged in `User` can use this blogging website API, with the exception of
 
 ## System Requirements
 
-This application runs on Ruby version 2.7.2
+This application runs on Ruby version 2.7
 
 ---
 

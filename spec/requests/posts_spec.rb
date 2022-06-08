@@ -19,6 +19,7 @@ RSpec.describe 'Posts', type: :request do
   let(:user) { create(:user) }
   let(:query_params) { { authorIds: user.id } }
   let(:update_params) { { tags: ['travel', 'vacation'], text: 'my text', authorIds: [1, 5] } }
+  let(:update_text_params) { { text: 'new text' } }
   let (:post1) { create(:post) }
   let (:post2) { create(:post) }
   let (:post3) { create(:post) }
@@ -76,6 +77,22 @@ RSpec.describe 'Posts', type: :request do
 
         expect(JSON.parse(response.body)).to eq(JSON.parse(expected_post.to_json))
         expect(response).to have_http_status(200)
+      end
+
+      it 'should only update text when only text is provided.' do
+        patch "/api/posts/#{post3.id}", params: update_text_params, headers: valid_headers, as: :json
+
+        expected_post = {
+          post: {
+            authorIds: [user.id],
+            id: post3.id, 
+            likes: post3.likes, 
+            popularity: post3.popularity,
+            reads: post3.reads,
+            tags: post3.tags.split(","),
+            text: 'new text'
+          }
+        }
       end
     end
 

@@ -79,7 +79,7 @@ RSpec.describe 'Posts', type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it 'should update text property of a post.' do
+      it 'should only update text when only text is provided.' do
         patch "/api/posts/#{post3.id}", params: update_text_params, headers: valid_headers, as: :json
 
         expected_post = {

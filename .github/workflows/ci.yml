@@ -14,6 +14,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Ensure database file has not changed
+        shell: bash
+        run: |
+          if [[ $(git diff origin/main -- db/development.sqlite3) ]]; then
+            echo "Please do not modify database file. It can be reset by running git checkout origin/main -- db/development.sqlite3"
+            exit 1
+          else
+            echo "Database file intact."
+          fi
       # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1

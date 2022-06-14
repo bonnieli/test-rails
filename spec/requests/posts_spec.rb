@@ -17,8 +17,9 @@ RSpec.describe 'Posts', type: :request do
   # Initialize the data
 
   let(:user) { create(:user) }
-  let(:query_params) { { authorIds: user.id } }
-  let(:update_params) { { tags: ['travel', 'vacation'], text: 'my text', authorIds: [1, 5] } }
+  let(:user2) { create(:user) }
+  let(:query_params) { { authorIds: user.id, sortBy: "id" } }
+  let(:update_params) { { tags: ['travel', 'vacation'], text: 'my text', authorIds: [user.id, user2.id] } }
   let(:update_text_params) { { text: 'new text' } }
   let (:post1) { create(:post) }
   let (:post2) { create(:post) }
@@ -65,7 +66,7 @@ RSpec.describe 'Posts', type: :request do
 
         expected_post = {
           post: {
-            authorIds: [1, 5],
+            authorIds: [user.id, user2.id],
             id: post1.id, 
             likes: post1.likes, 
             popularity: post1.popularity,
